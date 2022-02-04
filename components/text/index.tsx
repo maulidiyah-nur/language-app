@@ -7,7 +7,6 @@ import ITextProps from './type';
 
 const TextComponent = (props: ITextProps) => {
   const {children, color, strong, size, style, underline} = props;
-  console.log(props.style);
   return (
     <Text
       {...props}
@@ -17,7 +16,8 @@ const TextComponent = (props: ITextProps) => {
         fontSize: ComponentConstant.FontSize[(size ?? 'medium').toUpperCase()],
         ...(underline ? styles.underline : {}),
         ...(strong ? styles.strong : {}),
-      }}>
+      }}
+    >
       {children}
     </Text>
   );

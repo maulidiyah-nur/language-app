@@ -2,7 +2,7 @@ import IWord from './word';
 
 interface IExercise {
   id: number;
-  question: Array<IWord>;
+  questions: Array<IWord>;
   missingWordIndex: number;
   options: Array<IWord>;
 }

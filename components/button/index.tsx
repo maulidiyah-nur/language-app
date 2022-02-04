@@ -16,7 +16,8 @@ const ButtonComponent = (props: IButtonProps) => {
         ...styles[size ?? 'medium'],
         ...styles[type ?? 'primary'],
       }}
-      activeOpacity={0.8}>
+      activeOpacity={0.8}
+    >
       {children}
     </TouchableOpacity>
   );
