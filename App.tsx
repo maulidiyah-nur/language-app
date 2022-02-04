@@ -1,5 +1,7 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {SafeAreaView, ScrollView, StatusBar, View, LogBox} from 'react-native';
+import firestore from '@react-native-firebase/firestore';
+
 import Button from './components/button';
 import Text from './components/text';
 import Question from './components/question';
@@ -7,20 +9,37 @@ import ComponentConstant from './components/constant';
 
 import styles from './styles';
 import IExercise from './interfaces/exercise';
-import Dummy from './data/exercise';
 import IWord from './interfaces/word';
 
 LogBox.ignoreLogs(['EventEmitter.removeListener']);
 
 const App = () => {
+  const [exercises, setExercises] = useState<Array<IExercise>>([]);
   const [exerciseIndex, setExerciseIndex] = useState<number>(0);
   const [answerIndex, setAnswerIndex] = useState<number | undefined>();
   const [lockAnswer, setLockAnswer] = useState<boolean>(false);
-  const exercise: IExercise = Dummy[exerciseIndex];
+  const exercise: IExercise | undefined = exercises[exerciseIndex];
   const answer: IWord | undefined =
-    answerIndex !== undefined ? exercise.options[answerIndex] : undefined;
-  const isAnswerValid = answer?.key === exercise?.question[exercise?.missingWordIndex]?.key;
+    answerIndex !== undefined ? exercise?.options[answerIndex] : undefined;
+  const isAnswerValid = answer?.key === exercise?.questions[exercise?.missingWordIndex]?.key;
   const to = 'de';
+
+  const exerciseCollection = firestore().collection('exercise');
+
+  useEffect(() => {
+    exerciseCollection
+      .get()
+      .then((collectionSnapshot) => {
+        const response: Array<IExercise> = [];
+        collectionSnapshot.forEach((documentSnapshot) => {
+          response.push(documentSnapshot.data() as IExercise);
+        });
+        setExercises(response);
+      })
+      .catch((err) => {
+        console.log({err});
+      });
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -29,7 +48,7 @@ const App = () => {
         <View style={styles.mainWrapper}>
           <Text color={ComponentConstant.Colors.SECONDARY}>Fill in the missing word</Text>
           <View style={styles.questionWrapper}>
-            {exercise.question.map((q, i) => {
+            {exercise?.questions.map((q, i) => {
               return (
                 <Text
                   key={i}
@@ -45,7 +64,7 @@ const App = () => {
             })}
           </View>
           <View style={styles.questionWrapper}>
-            {exercise.question.map((q, i) => {
+            {exercise?.questions.map((q, i) => {
               return (
                 <Question
                   key={i}
@@ -60,7 +79,7 @@ const App = () => {
             })}
           </View>
           <View style={styles.optionWrapper}>
-            {exercise.options.map((o, i) => {
+            {exercise?.options.map((o, i) => {
               const trans = o.translations.find((x) => x.languageCode === to);
               return (
                 <Button
@@ -103,7 +122,7 @@ const App = () => {
                 <Text color={ComponentConstant.Colors.LIGHT} strong>
                   Answer:{' '}
                   {
-                    exercise?.question[exercise?.missingWordIndex]?.translations.find(
+                    exercise?.questions[exercise?.missingWordIndex]?.translations.find(
                       (t) => t.languageCode === to,
                     )?.value
                   }
@@ -119,7 +138,7 @@ const App = () => {
             type={lockAnswer ? 'white' : 'secondary'}
             shape="circle"
             onPress={() => {
-              const nextIndex = (exerciseIndex + 1) % Dummy.length;
+              const nextIndex = (exerciseIndex + 1) % exercises.length;
               setExerciseIndex(nextIndex);
               setAnswerIndex(undefined);
               setLockAnswer(false);
