@@ -3,7 +3,7 @@ import IExercise from '../interfaces/exercise';
 const Dummy: Array<IExercise> = [
   {
     id: 1,
-    question: [
+    questions: [
       {
         key: 'this',
         translations: [
@@ -83,7 +83,7 @@ const Dummy: Array<IExercise> = [
   },
   {
     id: 2,
-    question: [
+    questions: [
       {
         key: 'this',
         translations: [
@@ -163,7 +163,7 @@ const Dummy: Array<IExercise> = [
   },
   {
     id: 3,
-    question: [
+    questions: [
       {
         key: 'today',
         translations: [
@@ -234,7 +234,7 @@ const Dummy: Array<IExercise> = [
   },
   {
     id: 4,
-    question: [
+    questions: [
       {
         key: 'tomorrow',
         translations: [
@@ -305,7 +305,7 @@ const Dummy: Array<IExercise> = [
   },
   {
     id: 5,
-    question: [
+    questions: [
       {
         key: 'i',
         translations: [
