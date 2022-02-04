@@ -7,7 +7,6 @@ import ITextProps from './type';
 
 const TextComponent = (props: ITextProps) => {
   const {children, color, strong, size, style, underline} = props;
-  console.log(props.style);
   return (
     <Text
       {...props}

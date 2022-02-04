@@ -12,20 +12,23 @@ const styles = StyleSheet.create({
   },
   /* shape */
   rectangle: {
-    borderRadius: ComponentConstant.Spacing.SMALL,
+    borderRadius: ComponentConstant.Spacing.SMALL / 2,
   },
   circle: {
     borderRadius: ComponentConstant.Spacing.LARGE,
   },
   /* size */
   small: {
-    padding: ComponentConstant.Spacing.SMALL,
+    paddingHorizontal: ComponentConstant.Spacing.SMALL,
+    paddingVertical: ComponentConstant.Spacing.SMALL / 2,
   },
   medium: {
-    padding: ComponentConstant.Spacing.MEDIUM,
+    paddingHorizontal: ComponentConstant.Spacing.MEDIUM,
+    paddingVertical: ComponentConstant.Spacing.MEDIUM / 2,
   },
   large: {
-    padding: ComponentConstant.Spacing.LARGE,
+    paddingHorizontal: ComponentConstant.Spacing.LARGE,
+    paddingVertical: ComponentConstant.Spacing.LARGE / 2,
   },
   /* type */
   primary: {

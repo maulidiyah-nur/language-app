@@ -192,7 +192,7 @@ const Dummy: Array<IExercise> = [
         ],
       },
     ],
-    missingWordIndex: 1,
+    missingWordIndex: 0,
     options: [
       {
         key: 'follow',
