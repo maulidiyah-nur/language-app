@@ -1,6 +1,6 @@
 # Language App
 
-[![Watch the video](https://github.com/maulidiyah-nur/language-app/blob/development/Demo.png)](https://github.com/maulidiyah-nur/language-app/blob/development/Demo.mov)
+[![Watch the video](https://github.com/maulidiyah-nur/language-app/blob/main/Demo.png)](https://github.com/maulidiyah-nur/language-app/blob/development/Demo.mov)
 
 ## Technology used
 
