@@ -10,3 +10,10 @@
 - Node 14.17.6
 - iOS 15.0
 - Cocoapod
+
+## To Do List
+
+[x] Product Flow
+[x] Connect to Firestore
+[x] Linter, Prettier, Husky, Lint-Staged
+[ ] Test
